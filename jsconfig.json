@@ -8,6 +8,7 @@
         "src/*"
       ]
     },
+    "allowJs": true,
     "lib": [
       "ESNext",
       "DOM",
