@@ -48,7 +48,9 @@ const currentGroup = computed(() => allCities.value[tabActive.value])
       </van-tabs>
     </div>
     <div class="content">
-      <CityGroup :group-date="currentGroup" />
+      <template v-for="(value, key, index) in allCities">
+        <CityGroup v-show="tabActive === key" :group-date="value" />
+      </template>
     </div>
 
   </div>

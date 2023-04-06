@@ -11,7 +11,7 @@ defineProps({
 
 <template>
   <div class="city-group">
-    <vanIndexBar>
+    <vanIndexBar :sticky="false">
       <template v-for="(group, index) in groupDate.cities" :key="index">
           <VanIndexAnchor :index="group.group" />
           <template v-for="(city, index) in group.cities" :key="index">
