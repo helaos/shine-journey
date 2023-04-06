@@ -1,5 +1,7 @@
 <script setup>
+import useCity from '@/stores/modules/city';
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
   groupDate: {
@@ -8,11 +10,23 @@ const props = defineProps({
   }
 })
 
+// 动态获取索引
 const indexList = computed(() => {
   const list = props.groupDate.cities.map(item => item.group)
   list.unshift("#")
   return list
 })
+
+// 监听城市的点击
+const router = useRouter()
+const cityStore = useCity()
+const cityClick = city => {
+  console.log(city);
+  // 当前选中的城市
+  cityStore.currentCity = city
+  // 返回上一级
+  router.back()
+}
 
 </script>
 
@@ -27,13 +41,13 @@ const indexList = computed(() => {
       <VanIndexAnchor index="热门" />
       <div class="list">
         <template v-for="(city, index) in groupDate.hotCities">
-          <div class="city">{{ city.cityName }}</div>
+          <div class="city" @click="cityClick(city)">{{ city.cityName }}</div>
         </template>
       </div>
       <template v-for="(group, index) in groupDate.cities" :key="index">
         <VanIndexAnchor :index="group.group" />
         <template v-for="(city, index) in group.cities" :key="index">
-          <VanCell :title="city.cityName" />
+          <VanCell :title="city.cityName" @click="cityClick(city)" />
         </template>
       </template>
     </vanIndexBar>
