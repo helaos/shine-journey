@@ -6,3 +6,10 @@ export const getHotSuggests = () => {
     method: "get",
   });
 };
+
+export const getHomeCategories = () => {
+  return request({
+    url: "/home/categories",
+    method: "get",
+  });
+};

@@ -6,32 +6,39 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      redirect: "/home"
+      redirect: "/home",
     },
     {
       path: "/home",
-      component: () => import("@/views/home/home.vue")
+      component: () => import("@/views/home/home.vue"),
     },
     {
       path: "/favor",
-      component: () => import("@/views/favor/favor.vue")
+      component: () => import("@/views/favor/favor.vue"),
     },
     {
       path: "/message",
-      component: () => import("@/views/message/message.vue")
+      component: () => import("@/views/message/message.vue"),
     },
     {
       path: "/order",
-      component: () => import("@/views/order/order.vue")
+      component: () => import("@/views/order/order.vue"),
     },
     {
       path: "/city",
       component: () => import("@/views/city/city.vue"),
       meta: {
-        hideTabBar: true
+        hideTabBar: true,
       },
     },
-  ]
-})
+    {
+      path: "/search",
+      component: () => import("@/views/search/search.vue"),
+      meta: {
+        hideTabBar: true,
+      },
+    },
+  ],
+});
 
 export default router
