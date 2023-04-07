@@ -1,6 +1,12 @@
 <script setup>
 import HomeNavBar from './components/home-nav-bar.vue'
 import HomeSearchBox from './components/home-search-box.vue'
+import useHome from '@/stores/modules/home'
+
+// 发送网络请求
+const homeStore = useHome()
+homeStore.fetchHotSuggestData()
+
 </script>
 
 <template>

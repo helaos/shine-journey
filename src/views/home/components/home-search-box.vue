@@ -5,10 +5,22 @@ import { showFailToast } from 'vant'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { formatMonthDay, getDiffDays } from '@/utils/date-util'
+import useHome from '@/stores/modules/home';
 
-const router = useRouter();
+// Props
+const props = defineProps({
+  hotSuggests: {
+    type: Array,
+    default: () => []
+  }
+})
+
+// 获取当前城市
+const cityStore = useCity()
+const { currentCity } = storeToRefs(cityStore)
 
 // 点击获取 位置/城市 信息
+const router = useRouter();
 const cityClick = () => {
   router.push("/city")
 }
@@ -26,18 +38,14 @@ const positionClick = () => {
   })
 }
 
-// 获取当前城市
-const cityStore = useCity()
-const { currentCity } = storeToRefs(cityStore)
-
 // 时间范围
+const showCalendar = ref(false)
 const nowDate = new Date()
 const nextDate = new Date().setDate(nowDate.getDate() + 1)
 const startDate = ref(formatMonthDay(nowDate))
 const endDate = ref(formatMonthDay(nextDate))
 const stayCount = ref(1)
 
-const showCalendar = ref(false)
 const onConfirm = rangeValue => {
   const selectStartDate = rangeValue[0]
   const selectEndDate = rangeValue[1]
@@ -49,12 +57,16 @@ const onConfirm = rangeValue => {
   showCalendar.value = false
 }
 
+// 热门建议
+const homeStore = useHome()
+const { hotSuggests } = storeToRefs(homeStore)
+
 </script>
 
 <template>
   <div class="search-box">
     <!-- 位置信息 -->
-    <div class="location" >
+    <div class="location bottom-gray-line">
       <div class="city" @click="cityClick">{{ currentCity.cityName }}</div>
       <div class="position" @click="positionClick">
         <div class="text">我的位置</div>
@@ -63,7 +75,10 @@ const onConfirm = rangeValue => {
     </div>
 
     <!-- 日期范围 -->
-    <div class="section date-range" @click="showCalendar = true">
+    <div 
+      class="section date-range bottom-gray-line"
+      @click="showCalendar = true"
+    >
       <div class="start">
         <div class="date">
           <span class="tip">入住</span>
@@ -86,6 +101,27 @@ const onConfirm = rangeValue => {
       :show-confirm="false"
       @confirm="onConfirm"
     />
+
+    <!-- 价格/人数选择 -->
+    <div class="section price-counter bottom-gray-line">
+      <div class="start">价格不限</div>
+      <div class="end">人数不限</div>
+    </div>
+
+    <!-- 关键字筛选 -->
+    <div class="section keyword bottom-gray-line">关键字/位置/民宿名</div>
+
+    <!-- 热门建议 -->
+    <div class="section hot-suggests">
+      <template v-for="(hotSuggest, index) in hotSuggests" :key="index">
+        <div 
+          class="tag"
+          :style="{ color: hotSuggest.tagText.color, background: hotSuggest.tagText.background.color }"
+        >
+          {{ hotSuggest.tagText.text }}
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -137,12 +173,20 @@ const onConfirm = rangeValue => {
   }
 }
 
+.price-counter {
+  height: 44px;
+  .start {
+    border-right: 1px solid var(--line-color);
+  }
+}
+
 .section {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   padding: 0 20px;
   color: #999;
+  height: 44px;
 
   .start {
     flex: 1;
@@ -171,6 +215,17 @@ const onConfirm = rangeValue => {
       font-size: 15px;
       font-weight: 500;
     }
+  }
+}
+
+.hot-suggests {
+  margin: 10px 0;
+  .tag {
+    padding: 4px 8px;
+    border-radius: 3px;
+    margin: 4px;
+    font-size: 12px;
+    line-height: 1;
   }
 }
 </style>

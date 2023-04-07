@@ -30,7 +30,7 @@ const cityStore = useCity()
 cityStore.fetchAllCitiesData()
 const { allCities } = storeToRefs(cityStore)
 
-// 选中标签数据
+// TODO 选中标签数据
 const currentGroup = computed(() => allCities.value[tabActive.value])
 
 </script>

@@ -1,6 +1,9 @@
 :root {
   --primary-color: #ff9854;
 
+  /* 分割线的颜色 */
+  --line-color: #faf8f9;
+
   /* 搜索框图标颜色 */
   --van-search-left-icon-color: var(--primary-color) !important;
 }
@@ -8,4 +11,8 @@
 body {
   font-size: 14px;
   font-family: "Courier New", Courier, monospace;
+}
+
+.bottom-gray-line {
+  border-bottom: 1px solid var(--line-color);
 }
