@@ -2,12 +2,14 @@
 import HomeNavBar from './components/home-nav-bar.vue'
 import HomeSearchBox from './components/home-search-box.vue'
 import HomeCategories from './components/home-categories.vue'
+import HomeContent from './components/home-content.vue'
 import useHome from '@/stores/modules/home'
 
 // 发送网络请求
 const homeStore = useHome()
 homeStore.fetchHotSuggestData()
 homeStore.fetchCategoriesData()
+homeStore.fetchHouseListData()
 
 </script>
 
@@ -19,7 +21,7 @@ homeStore.fetchCategoriesData()
     </div>
     <HomeSearchBox />
     <HomeCategories />
-    
+    <HomeContent />
   </div>
 </template>
 
@@ -30,5 +32,4 @@ homeStore.fetchCategoriesData()
     border-radius: 6px;
   }
 }
-
 </style>

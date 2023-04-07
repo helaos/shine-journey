@@ -13,3 +13,12 @@ export const getHomeCategories = () => {
     method: "get",
   });
 };
+
+export const getHomeHouseList = (currentPage = 1) => {
+  return request({
+    url: "/home/houselist",
+    params: {
+      page: currentPage,
+    },
+  });
+};
