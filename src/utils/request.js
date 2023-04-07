@@ -3,7 +3,7 @@ import axios from 'axios'
 // TODO pinia 状态数据管理
 
 const service = axios.create({
-  baseURL: "",
+  baseURL: import.meta.env.VITE_APP_SERVER_URL,
   timeout: 5000,
 });
 
