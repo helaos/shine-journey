@@ -1,6 +1,4 @@
 <script setup>
-import { computed } from 'vue';
-
 
 // Props
 const props = defineProps({
@@ -16,7 +14,7 @@ const props = defineProps({
   <div class="card-item">
     <div class="item-inner">
       <div class="cover">
-        <img :src="cardData.image.url" alt="">
+        <img :src="cardData?.image?.url" alt="">
       </div>
       <div class="info">
         <div class="location">
@@ -26,8 +24,8 @@ const props = defineProps({
         <div class="name">{{ cardData.houseName }}</div>
         <div class="summary">{{ cardData.summaryText }}</div>
         <div class="price">
-          <div class="new">￥ {{ cardData.finalPrice }}</div>
-          <div class="old"> ¥ {{ cardData.productPrice }}</div>
+          <div class="new">¥{{ cardData.finalPrice }}</div>
+          <div class="old">¥{{ cardData.productPrice }}</div>
           <div class="tip" v-if="cardData.priceTipBadge">
               {{ cardData.priceTipBadge.text }}
           </div>

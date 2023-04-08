@@ -18,7 +18,7 @@ const rateNum = computed(() => Number(props.cardData.commentScore))
   <div class="card-item">
     <div class="item-inner">
       <div class="cover">
-        <img :src="cardData.image.url" alt="">
+        <img :src="cardData?.image?.url" alt="">
       </div>
       <div class="info">
         <div class="summary">{{ cardData.summaryText }}</div>
@@ -31,7 +31,7 @@ const rateNum = computed(() => Number(props.cardData.commentScore))
             readonly
             allow-half
           />
-          <div class="new">￥ {{ cardData.finalPrice }}</div>
+          <div class="new">¥{{ cardData.finalPrice }}</div>
         </div>
       </div>
     </div>
