@@ -1,4 +1,5 @@
 import { onMounted, onUnmounted, onActivated, onDeactivated, ref } from "vue";
+import { throttle } from 'underscore'
 
 const useScroll = () => {
   const isReachBottom = ref(false);
@@ -7,7 +8,7 @@ const useScroll = () => {
   const scrollHeight = ref(0);
 
   // 监听window滚动加载数据
-  const scrollListenerHandler = () => {
+  const scrollListenerHandler = throttle(() => {
     // 窗体高度
     clientHeight.value = document.documentElement.clientHeight;
     // 滚动位置
@@ -21,7 +22,7 @@ const useScroll = () => {
       //   reachBottomCB();
       // }
     }
-  };
+  }, 500)
 
   onMounted(() => {
     window.addEventListener("scroll", scrollListenerHandler);
