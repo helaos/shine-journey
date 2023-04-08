@@ -22,7 +22,7 @@ const useScroll = () => {
       //   reachBottomCB();
       // }
     }
-  }, 500)
+  }, 100)
 
   onMounted(() => {
     window.addEventListener("scroll", scrollListenerHandler);
